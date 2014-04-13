@@ -1,0 +1,138 @@
+<attackcfg>
+
+        <rule>
+	        <key label="sel_stmt"/>	
+	        <val>
+	        	<start/>
+	        	<const label="SELECT"/>
+	        	<oneof>
+	        		<!--  Either  -->
+	        		<const label="*"/>
+	        		<!--  Or -->
+	        		<grp>
+		        		<var label="col_name"/>
+		        		<!-- optional repetition  -->
+		        		<zormore><const label=","/><var label="col_name"/></zormore>
+		        	</grp>
+	        	</oneof> 	
+	        	<const label="FROM"/>
+	        	<var label="tab_name"/>
+	        	<zorone>
+		        	<const label="WHERE"/>
+		        	<var label="where_exp"/>
+	        	</zorone>
+	        	<stop/>
+	        </val>
+        </rule>
+
+        <rule>
+	        <key label="tab_name"/>	
+	        <val>
+	        	<start/>
+		        	<regexp label="[0-9a-zA-Z_]{1,8}"/>
+	        	<stop/>
+	        </val>
+        </rule>       
+        
+        <rule>
+        	<key label="bin_op"/>
+        	<val>
+        		<start/>
+        		<oneof>
+        			<const label="="/>
+        			<const label="eq"/>
+        			<const label="ne"/>
+        			<const label="lt"/>
+        			<const label="le"/>
+        			<const label="gt"/>
+        			<const label="ge"/>
+        			<const label=">"/>
+        		</oneof>
+        		<stop/>
+        	</val>
+        </rule>
+        
+        <rule>
+        	<key label="where_exp"/>
+        	<val>
+	        	<start/>
+		        	<var label="col_name"/>
+		        	<var label="bin_op"/>
+		        	<var label="col_val"/>
+	        	<stop/>
+        	</val>
+        </rule>
+        
+        <rule>
+        	<key label="col_val"/>
+        	<val>
+        		<start/>
+        			<oneof>
+        				<regexp label="[0-9a-zA-Z_]{1,3}"/>
+        				<grp>
+			        		<const label="'"/>
+			        		<zorone>
+			        			<regexp label="[0-9a-zA-Z_]{0,10}"/>
+			        		</zorone>
+			        		<const label="'"/>
+		        		</grp>
+        				<grp>
+			        		<const label="'"/>
+			        		<zorone>
+			        			<regexp label="[0-9a-zA-Z_]{0,10}"/>
+			        		</zorone>
+			        		<const label="'"/>
+				        	<oneof>
+				        		<var label="tautology"/>
+				        		<var label="konjunction"/>
+				        	</oneof>
+			        		<var label="comment"/>
+		        		</grp>
+        			</oneof>
+        		<stop/>
+        	</val>
+        </rule>
+        
+        <rule>
+        	<key label="col_name"/>
+        	<val>
+        		<start/>
+	        		<regexp label="[0-9a-zA-Z_]{1,10}"/>
+        		<stop/>
+        	</val>
+        </rule>
+        
+        
+        <rule>
+        	<key label="tautology"/>
+        	<val>
+        		<start/>
+	        		<const label="OR"/>
+	        		<const label="1"/>
+	        		<const label="="/>
+	        		<const label="1"/>
+        		<stop/>
+        	</val>
+        </rule>
+        
+        <rule>
+        	<key label="konjunction"/>
+        	<val>
+        		<start/>
+	        		<const label="AND"/>
+	        		<var label="where_exp"/>
+        		<stop/>
+        	</val>
+        </rule>
+
+        
+        <rule>
+        	<key label="comment"/>
+        	<val>
+        		<start/>
+	        		<const label="#"/>
+        		<stop/>
+        	</val>
+        </rule>
+       
+</attackcfg>

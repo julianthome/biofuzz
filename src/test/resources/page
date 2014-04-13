@@ -1,0 +1,350 @@
+<body>
+	<div id="header">
+	  <div id="heading">WebChess</div>
+	</div>
+<div id="content">
+<div id="navcontainer">
+<ul id="navlist">
+<li><a href="#continuegame">Active games</a></li>
+<li><a href="#invitations">Pending challenges</a></li>
+<li><a href="#messages">Messages</a></li>
+<li><a href="#challenge">Challenge others</a></li>
+<li><a href="#viewgame">Replay</a></li>
+<li><a href="#preferences">Preferences</a></li>
+<li><a href="#personalinfo">Personal</a></li>
+<li><a href="#reload">Reload</a></li>
+<li><a href="#logout">Logout</a></li>
+</ul>
+
+<form name="logOutForm" action="mainmenu.php" method="post">
+<input type="hidden" name="response" value="" />
+<input type='hidden' name='ToDo' value='Logout'/>
+</form>
+</div>
+<div id="rightcolumn">
+<div id="personalinfo">
+	<div id="ctr" align="center">
+		<div class="preferences">
+			<div class="preferences-form">
+				<form name="PersonalInfo" action="mainmenu.php" method="post">
+				<div class="form-block">
+                                <h1>Personal information</h1>
+                                                <div class="inputlabel">First Name</div>
+						<div><input name="txtFirstName" type="text" class="inputbox" value="webchess" /></div>
+                                                <div class="inputlabel">Last Name</div>
+						<div><input name="txtLastName" type="text" class="inputbox" value="webchess" /></div>
+						                                                <div class="inputlabel">Current Password</div>
+						<div><input name="pwdOldPassword" type="password" class="inputbox" /></div>
+                                                <div class="inputlabel">New Password</div>
+						<div><input name="pwdPassword" type="password" class="inputbox" /></div>
+                                                <div class="inputlabel">Password Confirmation</div>
+						<div><input name="pwdPassword2" type="password" class="inputbox" /></div>
+                                                <input type="button" value="Update" class="button" onclick="validatePersonalInfo()" />
+						<input type="hidden" name="ToDo" value="UpdatePersonalInfo" />
+				</div>
+				</form>
+			</div>
+			<div class="login-text">
+				<div class="ctr"><img src="images/webchess.jpg" width="65" height="92" alt="security" /></div>
+                                <p>Here you can change your personal information. Remember to press the 'Update' button to store the changes.</p>
+				<p></p>
+			</div>
+			<div class="clr"></div>
+		</div>
+	</div>
+</div>
+
+<div id="preferences">
+<div align="center">
+	<div class="preferences">
+		<div class="preferences-form">
+			<form name="userdata" method="post" action="mainmenu.php">
+				<div class="form-block">
+                                        <h1>Preferences</h1>
+                                        <div class="inputlabel">History</div>
+					<div class="inputbox">
+					                                                <div><input name="rdoHistory" type="radio" value="pgn" checked="checked" /> PGN</div>
+                                                <div><input name="rdoHistory" type="radio" value="verbous" /> Verbose</div>
+										</div>
+                                        <div class="inputlabel">History Layout</div>
+					<div class="inputbox">
+					                                                <div><input name="rdoHistorylayout" type="radio" value="columns" checked="checked" /> Columns (Scoresheet)</div>
+                                                <div><input name="rdoHistorylayout" type="radio" value="paragraph" /> Paragraph</div>
+										</div>
+					<div class="inputlabel">Theme</div>
+					<div class="inputbox"><select name="rdoTheme">
+												<option value="beholder" selected="selected">Beholder</option>
+							<option value="gnuchess_fancy">GNU Chess Fancy</option>
+							<option value="gnuchess_simple">GNU Chess Simple</option>
+										</select></div>
+                                        <div class="inputlabel">Auto-reload (min: 42 secs)</div>
+					<div><input type="text" class="inputbox" name="txtReload" value="42" /></div>
+					                                        <input type="submit" class="button" value="Update" />
+					<input type="hidden" class="button" name="ToDo" value="UpdatePrefs" />
+				</div>
+			</form>
+		</div>
+		<div class="login-text">
+			<div class="ctr"><img src="images/webchess.jpg" width="65" height="92" alt="security" /></div>
+                        <p>You can customize WebChess with these general settings.</p>
+    	</div>
+		<div class="clr"></div>
+	</div>
+</div>
+</div>
+
+<div id="challenge">
+	<div class="ctr" align="center">
+		<div class="preferences">
+			<div class="preferences-form">
+				<form name="newchallenge" action="mainmenu.php" method="post">
+				<div class="form-block">
+                                <h1>Issue a challenge</h1>
+                                                <div class="inputlabel">Select Opponent</div>
+						<select name="opponent">
+						<option selected="selected" value="2"> user</option>
+						</select>
+                                                <div class="inputlabel" style="padding-top:10px;">Your Color</div>
+						<div class="inputbox">
+                                                        <div><input name="color" type="radio" value="random" checked="checked" /> Random</div>
+                                                        <div><input name="color" type="radio" value="white" /> White</div>
+                                                        <div><input name="color" type="radio" value="black" /> Black</div>
+						</div>
+                                                <input type="submit" value="Invite" class="button" />
+                                                <input type="button" value="Cancel" class="button" onclick="window.open('mainmenu.php', '_self')" />
+						<input type="hidden" name="ToDo" value="InvitePlayer" />
+				</div>
+				</form>
+			</div>
+			<div class="login-text">
+				<div class="ctr"><img src="images/webchess.jpg" width="65" height="92" alt="security" /></div>
+                                <p>Select an opponent and challenge him to a new game.</p>
+				<p></p>
+			</div>
+			<div class="clr"></div>
+		</div>
+	</div>
+</div>
+
+<div id="invitations">
+	<div class="ctr" align="center">
+		<div class="preferences">
+			<div class="preferences-form">
+				<form name="responseToInvite" action="mainmenu.php" method="post">
+				<div class="form-block">
+                                        <h1>Pending challenges</h1>
+						<div class="inputlabel"></div>
+						<table>
+						<thead>
+						  <tr>
+                                                      <th class="mainHeader" colspan="6">Challenges from other players</th>
+						  </tr>
+						  <tr>
+                                                        <th style="text-align:left;display:none;">Rank</th>
+                                                        <th style="text-align:left;"><a href="" onclick="this.blur(); return sortTable('respInviteTblBdy', 1, true);" title="Game Id">Id</a></th>
+                                                        <th style="text-align:left;"><a href="" onclick="this.blur(); return sortTable('respInviteTblBdy', 2, true);" title="White's handle">White</a></th>
+                                                        <th style="text-align:left;"><a href="" onclick="this.blur(); return sortTable('respInviteTblBdy', 3, true);" title="Black's handle">Black</a></th>
+                                                        <th><a href="" onclick="this.blur(); return sortTable('respInviteTblBdy', 4, true);" title="Date when the challenge was issued">Issued</a></th>
+                                                        <th style="text-align:center;">Action</th>
+						  </tr>
+						</thead>
+						<tbody id="respInviteTblBdy">
+							<tr><td colspan="3">You are not currently invited to any games</td></tr>
+						</tbody>
+						</table>
+				</div>
+				<input type="hidden" name="response" value="" />
+				<input type="hidden" name="messageFrom" value="" />
+				<input type="hidden" name="gameID" value="" />
+				<input type="hidden" name="ToDo" value="ResponseToInvite" />
+				</form>
+
+				<form name="withdrawRequestForm" action="mainmenu.php" method="post">
+				<div class="form-block">
+						<div class="inputlabel"></div>
+						<table>
+						<thead>
+						  <tr>
+                                                      <th class="mainHeader" colspan="7">Pending challenges from you</th>
+						  </tr>
+						  <tr>
+                                                        <th style="text-align:left;display:none;">Rank</th>
+                                                        <th style="text-align:left;"><a href="" onclick="this.blur(); return sortTable('inviteTblBdy', 1, true);" title="Game Id">Id</a></th>
+                                                        <th style="text-align:left;"><a href="" onclick="this.blur(); return sortTable('inviteTblBdy', 2, true);" title="White's handle">White</a></th>
+                                                        <th style="text-align:left;"><a href="" onclick="this.blur(); return sortTable('inviteTblBdy', 3, true);" title="Black's handle">Black</a></th>
+                                                        <th><a href="" onclick="this.blur(); return sortTable('inviteTblBdy',  4, true);" title="Status"				 >Status</a></th>
+                                                        <th><a href="" onclick="this.blur(); return sortTable('inviteTblBdy',  5, true);" title="Date when the challenge was issued">Issued</a></th>
+                                                        <th style="text-align:center;">Action</th>
+						  </tr>
+						</thead>
+						<tbody id="inviteTblBdy">
+							<tr><td colspan="4">You have no current unanswered invitations</td></tr>
+						</tbody>
+						</table>
+				</div>
+				<input type="hidden" name="gameID" value="" />
+				<input type="hidden" name="ToDo" value="WithdrawRequest" />
+				</form>
+			</div>
+			<div class="login-text">
+				<div class="ctr"><img src="images/webchess.jpg" width="65" height="92" alt="security" /></div>
+                                <p>This is an overview of all your pending challenges. Accept or decline an invitation to a new game or withdraw your invitations to others.</p>
+				<p></p>
+			</div>
+			<div class="clr"></div>
+		</div>
+	</div>
+</div>
+
+<div id="continuegame">
+	<div class="ctr" align="center">
+		<div class="preferences">
+			<div class="preferences-form">
+				<form name="existingGames" action="chess.php" method="post">
+				<div class="form-block">
+                                        <h1>Continue a game in progress</h1>
+                                                <div class="inputlabel">Select a game</div>
+						<table>
+						<thead>
+						  <tr>
+                                                  <th class="mainHeader" colspan="8">Games in Progress</th>
+						  </tr>
+						  <tr>
+                                                        <th style="text-align:left;display:none;">Rank</th>
+                                                        <th style="text-align:left;"><a href="" onclick="this.blur(); return sortTable('inProgrTblBdy', 1, true);" title="Game Id">Id</a></th>
+                                                        <th style="text-align:left;"><a href="" onclick="this.blur(); return sortTable('inProgrTblBdy', 2, true);" title="White's handle">White</a></th>
+                                                        <th style="text-align:left;"><a href="" onclick="this.blur(); return sortTable('inProgrTblBdy', 3, true);" title="Black's handle">Black</a></th>
+                                                        <th><a href="" onclick="this.blur(); return sortTable('inProgrTblBdy',  4, true);" title="Moves"				 >Mvs</a></th>
+                                                        <th><a href="" onclick="this.blur(); return sortTable('inProgrTblBdy',  5, true);" title="Current Turn"			 >Current Turn</a></th>
+                                                        <th><a href="" onclick="this.blur(); return sortTable('inProgrTblBdy',  6, true);" title="Start Date of the Game">Start Date</a></th>
+                                                        <th><a href="" onclick="this.blur(); return sortTable('inProgrTblBdy',  7, true);" title="Date of Last Move"	 >Last Move</a></th>
+						  </tr>
+						</thead>
+						<tbody id="inProgrTblBdy">
+					<tr><td colspan="6">You do not currently have any games in progress</td></tr>
+						</tbody>
+						</table>
+                                                <div class="inputlabel" style="padding-top:10px;">Will both players play from the same computer?</div>
+						<div class="inputbox">
+                                                        <div><input name="rdoShare" type="radio" value="" /> Yes</div>
+                                                        <div><input name="rdoShare" type="radio" value="no" checked="checked" /> No</div>
+						</div>
+						<input type="hidden" name="gameID" value="" />
+						<input type="hidden" name="sharePC" value="no" />
+                                                <b>WARNING!</b>
+						<br />
+                                                Games will expire WITHOUT NOTICE if a move isn't made after 42 days!					</div>
+				</form>
+			</div>
+			<div class="login-text">
+				<div class="ctr"><img src="images/webchess.jpg" width="65" height="92" alt="security" /></div>
+                                <p>Select a game from the list and resume play by clicking on the game id</p>
+				<p></p>
+			</div>
+			<div class="clr"></div>
+		</div>
+	</div>
+</div>
+
+<div id="messages">
+<div align="center">
+	<div class="preferences">
+		<div class="preferences-form">
+			<form name="messageSendForm" method="post" action="mainmenu.php">
+				<div class="form-block">
+                                    <h1>Messages</h1>
+					
+					
+                                        <div class="inputlabel">Send message to player</div>
+                                        <div>
+                                            <select name="player">
+						<option selected="selected" value="2"> user</option>
+                                            </select>
+                                        </div>
+
+                                        <input type="submit" class="button" value="Open Message Window" onclick="MessagePlayer( getObject('player').value )" />
+				</div>
+			</form>
+                        <form name="messageViewForm" method="post" action="viewmessage.php">
+				<div class="form-block">
+					
+                                        <div class="inputlabel">Current messages</div>
+
+<table>
+						<thead>
+						  <tr>
+                                                      <th class="mainHeader" colspan="3">Pending messages</th>
+						  </tr>
+						  <tr>
+                                                      <th style="text-align:left;"><a href="" onclick="this.blur(); return sortTable('respInviteTblBdy', 1, true);" title="Player who sent it">Player</a></th>
+                                                      <th style="text-align:left;"><a href="" onclick="this.blur(); return sortTable('respInviteTblBdy', 3, true);" title="Subject">Subject</a></th>
+                                                      <th><a href="" onclick="this.blur(); return sortTable('respInviteTblBdy', 4, true);" title="Date when the message was sent">Date</a></th>
+						  </tr>
+						</thead>
+						<tbody id="respInviteTblBdy">
+                                                    <tr class="alternateRow"><td><a href="javascript:viewMessage(2)">webchess</a></td><td>Hello</td><td>2013-05-05 11:58:24</td></tr><tr><td><a href="javascript:viewMessage(1)">Webchess</a></td><td>Database Upgrade tSuccessfull</td><td>2013-05-03 15:21:33</td></tr>						</tbody>
+						</table>                                        
+
+					<input type="hidden" name="messageID" value="" />
+				</div>
+			</form>
+		</div>
+		<div class="login-text">
+			<div class="ctr"><img src="images/webchess.jpg" width="65" height="92" alt="security" /></div>
+                        <p>You can send and receive messages to other players here.</p>
+                </div>
+		<div class="clr"></div>
+	</div>
+</div>
+</div>
+
+
+<div id="viewgame">
+	<div class="ctr" align="center">
+		<div class="preferences">
+			<div class="preferences-form">
+				<form name="endedGames" action="chess.php" method="post">
+				<div class="form-block">
+                                        <h1>View finished games</h1>
+                                                <div class="inputlabel">Select a game to view</div>
+						<table>
+						<thead>
+						  <tr>
+                                                      <th class="mainHeader" colspan="8">Finished games</th>
+						  </tr>
+						  <tr>
+                                                      <th style="text-align:left;display:none;">Rank</th>
+                                                      <th style="text-align:left;"><a href="" onclick="this.blur(); return sortTable('finishedTblBdy', 1, true);" title="Game Id">Id</a></th>
+                                                      <th style="text-align:left;"><a href="" onclick="this.blur(); return sortTable('finishedTblBdy', 2, true);" title="White's handle">White</a></th>
+                                                      <th style="text-align:left;"><a href="" onclick="this.blur(); return sortTable('finishedTblBdy', 3, true);" title="Black's handle">Black</a></th>
+                                                      <th><a href="" onclick="this.blur(); return sortTable('finishedTblBdy',  4, true);" title="Moves"				 >Mvs</a></th>
+                                                      <th><a href="" onclick="this.blur(); return sortTable('finishedTblBdy',  5, true);" title="Game Result"			 >Result</a></th>
+                                                      <th><a href="" onclick="this.blur(); return sortTable('finishedTblBdy',  6, true);" title="Start Date of the Game">Start Date</a></th>
+                                                      <th><a href="" onclick="this.blur(); return sortTable('finishedTblBdy',  7, true);" title="Date of Last Move"	 >Last Move</a></th>
+						  </tr>
+						</thead>
+						<tbody id="finishedTblBdy">
+<tr><td colspan="6">You do not currently have any games in progress</td></tr>
+	</tbody>
+	</table>
+	<input type="hidden" name="gameID" value="" />
+	<input type="hidden" name="sharePC" value="no" />
+	<div style="padding-top:10px;">
+	<b>WARNING!</b>
+	<br />
+        Finished games will be deleted WITHOUT NOTICE after 42 days!	</div>
+	</div>
+	</form>
+</div>
+			<div class="login-text">
+				<div class="ctr"><img src="images/webchess.jpg" width="65" height="92" alt="security" /></div>
+                                <p>Select a game to view from the list by clicking on the game id</p>
+				<p></p>
+			</div>
+			<div class="clr"></div>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+</body>

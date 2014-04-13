@@ -1,0 +1,500 @@
+<attackcfg>
+        <rule>
+	        <key label="S"/>	
+	        <val>
+	        	<start/>
+	        		<var label="stmt"/>
+	        	<stop/>
+	        </val>
+        </rule>
+        
+        <rule>
+	        <key label="stmt"/>	
+	        <val>
+	        	<start/>
+	        		<oneof>
+						<var label="insrt_stmt"/>
+						<var label="sel_stmt"/>
+						<var label="updt_stmt"/>
+						<var label="del_stmt"/>
+					</oneof>
+					<zorone>
+						<grp>
+							<const label=";"/>
+							<var label="stmt"/>
+						</grp>
+					</zorone>
+	        	<stop/>
+	        </val>
+        </rule>
+
+
+        <rule>
+	        <key label="insrt_stmt"/>	
+	        <val>
+	        	<start/>
+					<const label="INSERT"/>
+					<const label="INTO"/>
+					<var label="tab_name"/>
+					<zorone>
+						<const label="("/>
+						<var label="col_name"/>
+						<zormore>
+							<const label=","/>
+							<var label="col_name"/>
+						</zormore>
+						<const label=")"/>
+					</zorone>
+					<const label="VALUES"/>
+					<const label="("/>
+					<var label="col_val"/>
+					<zormore>
+						<const label=","/>
+						<var label="col_val"/>
+					</zormore>
+					<const label=")"/>
+	        	<stop/>
+	        </val>
+        </rule>
+
+        <rule>
+	        <key label="updt_stmt"/>	
+	        <val>
+	        	<start/>
+		        	<const label="UPDATE"/>
+		        	<var label="tab_name"/>
+		        	<const label="SET"/>
+					<var label="set_exp"/>
+			        <zormore>
+				        <const label=","/>
+				        <var label="set_exp"/>
+			        </zormore>
+		        	<zorone>
+				        <const label="WHERE"/>
+				        <var label="where_exp"/>
+		        	</zorone>
+		        	<zorone>
+		        		<var label="limit"/>
+		        	</zorone>
+	        	<stop/>
+	        </val>
+        </rule>
+        
+        
+        <rule>
+	        <key label="del_stmt"/>	
+	        <val>
+	        	<start/>
+		        	<const label="DELETE"/>
+		        	<const label="FROM"/>
+		        	<var label="tab_name"/>
+		        	<const label="WHERE"/>
+		        	<var label="where_exp"/>
+	        	<stop/>
+	        </val>
+        </rule>
+        
+        <rule>
+	        <key label="limit"/>	
+	        <val>
+	        	<start/>
+		        	<const label="LIMIT"/>
+					<var label="par_num"/>
+					<zormore>
+						<const label=","/>
+						<var label="par_num"/>
+					</zormore>
+	        	<stop/>
+	        </val>
+        </rule>
+        
+        
+
+        <rule>
+	        <key label="sel_stmt"/>	
+	        <val>
+	        	<start/>
+		        	<const label="SELECT"/>
+		        	<zorone>
+		        		<const label="DISTINCT"/>
+		        	</zorone>
+					<oneof>
+						<const label="*"/>
+						<grp>
+							<var label="col_name"/>
+							<zormore>
+								<const label=","/>
+								<var label="col_name"/>
+							</zormore>
+						</grp>
+						<var label="db_func"/>
+					</oneof>
+		
+
+		        	<const label="FROM"/>
+			        <var label="tab_name"/>
+				    <zormore>
+				    	<const label=","/>
+				    	<var label="tab_name"/>
+				    </zormore>
+		        	<zorone>
+			        	<const label="WHERE"/>
+			        	<var label="where_exp"/>
+		        	</zorone>
+		        	<zorone>
+		        		<oneof>
+							<grp>
+								<oneof>
+				        			<const label="ORDER BY"/>
+				        			<const label="ORDERBY"/>
+				        		</oneof>
+					        	<var label="col_name"/>
+						        <zormore>
+						        	<const label=","/>
+						        	<var label="col_name"/>
+						        </zormore>
+						        <zorone>
+					        		<oneof>
+					        			<const label="ASC"/>
+						        		<const label="DESC"/>
+						        	</oneof>
+						        </zorone>
+			        		</grp>
+				        	<grp>
+				        		<const label="UNION"/>
+				        		<const label="ALL"/>
+				        		<var label="sel_stmt"/>
+				        	</grp>
+				        	<grp>
+						        <var label="tautology"/>
+						        <var label="comment"/>
+				        	</grp>
+		        		</oneof>
+		        	</zorone>
+		        	<zorone>
+		        		<var label="limit"/>
+		        	</zorone>
+	        	<stop/>
+	        </val>
+        </rule>
+
+        <rule>
+	        <key label="tab_name"/>	
+	        <val>
+	        	<start/>
+	        		<oneof>
+		        		<regexp label="[0-9a-zA-Z_]{1,20}"/>
+		        		<const label="INFORMATION_SCHEMA.TABLES"/>
+	        		</oneof>
+	        	<stop/>
+	        </val>
+        </rule>       
+        
+        <rule>
+        	<key label="bin_op"/>
+        	<val>
+        		<start/>
+        		<oneof>
+        			<!--  <const label="is"/> -->
+        			<const label="="/>
+        			<const label="&gt;"/>
+        			<const label="&lt;"/>
+        			<const label="&lt;&gt;"/>
+        		</oneof>
+        		<stop/>
+        	</val>
+        </rule>
+        
+         <rule>
+        	<key label="set"/>
+        	<val>
+        		<start/>
+	        		<const label="("/>
+	        		<var label="par"/>
+	        		<zormore>
+	        			<const label=","/>
+	        			<var label="par"/>
+	        		</zormore>
+	        		<const label=")"/>
+        		<stop/>
+        	</val>
+        </rule>
+        
+         <rule>
+        	<key label="set_op"/>
+        	<val>
+        		<start/>
+        			<const label="in"/>
+        		<stop/>
+        	</val>
+        </rule>
+        
+        <rule>
+        	<key label="log_op"/>
+        	<val>
+        		<start/>
+	        		<oneof>
+	        			<const label="OR"/>
+	        			<const label="AND"/>
+	        		</oneof>
+        		<stop/>
+        	</val>
+        </rule>
+        
+        <rule>
+        	<key label="where_exp"/>
+        	<val>
+	        	<start/>
+					<oneof>
+						<grp>
+							<const label="("/>
+							<var label="where_exp"/>
+							<const label=")"/>
+						</grp>
+						<grp>
+							<var label="par"/>
+		        			<var label="bin_op"/>
+		        			<var label="par"/>
+						</grp>
+						<grp>
+							<var label="par"/>
+		        			<var label="set_op"/>
+		        			<var label="set"/>
+						</grp>
+					</oneof>
+		        	<zorone>
+		        		<var label="log_op"/>
+		        		<var label="where_exp"/>
+		        	</zorone>
+	        	<stop/>
+        	</val>
+        </rule>
+        
+        <rule>
+        	<key label="set_exp"/>
+        	<val>
+	        	<start/>
+		        	<var label="col_name"/>
+		        	<const label="="/>
+		        	<var label="col_val"/>
+	        	<stop/>
+        	</val>
+        </rule>
+
+        
+        <rule>
+        	<key label="col_val"/>
+        	<val>
+        		<start/>
+        			<oneof>
+						<var label="db_var"/>
+	        			<var label="par"/>
+        			</oneof>
+        		<stop/>
+        	</val>
+        </rule>
+
+        <rule>
+        	<key label="db_func"/>
+        	<val>
+        		<start/>
+	        		<oneof>
+	        			<const label="NOW()"/>
+	        			<const label="COUNT(*)"/>
+	        		</oneof>
+        		<stop/>
+        	</val>
+        </rule>
+        
+         <rule>
+        	<key label="db_rec_func"/>
+        	<val>
+        		<start/>
+        			<oneof>
+	        			<const label="CONCAT("/>
+	        			<const label="MD5("/>
+	        		</oneof>
+	        		<var label="par"/>
+	        		<zormore>
+	        			<const label=","/>
+	        			<var label="par"/>
+	        		</zormore>
+	        		<const label=")"/>
+        		<stop/>
+        	</val>
+        </rule>
+
+        <rule>
+        	<key label="db_var"/>
+        	<val>
+        		<start/>
+        		<const label="NULL"/>
+        		<stop/>
+        	</val>
+        </rule>
+
+        <rule>
+        	<key label="db_del"/>
+        	<val>
+        		<start/>
+        			<const label="&#59;"/>
+        		<stop/>
+        	</val>
+        </rule>
+        
+           <rule>
+        	<key label="col_name"/>
+        	<val>
+        		<start/>
+        			<oneof>
+		        		<grp>
+		        			<const label="`"/>
+		        			<var label="col_label"/>
+		        			<const label="`"/>
+		        		</grp>
+		        		<var label="col_label"/>
+	        		</oneof>
+        		<stop/>
+        	</val>
+        </rule>
+        
+        
+        <rule>
+        	<key label="col_label"/>
+        	<val>
+        		<start/>
+		        	<regexp label="[a-zA-Z_\.\*0-9]{1,50}"/>
+        		<stop/>
+        	</val>
+        </rule>
+        
+        
+        <rule>
+        	<key label="tautology"/>
+        	<val>
+        		<start/>
+	        		<var label="log_op"/>
+	        		<oneof>
+	        			<grp>
+			        		<const label="1"/>
+			        		<const label="="/>
+			        		<const label="1"/>
+		        		</grp>
+		        		<grp>
+			        		<const label="&quot;"/>
+			        		<const label="s"/>
+			        		<const label="&quot;"/>
+			        		<const label="="/>
+			        		<const label="&quot;"/>
+			        		<const label="s"/>
+			        		<const label="&quot;"/>
+		        		</grp>
+		        		<grp>
+			        		<var label="par_num"/>
+			        		<var label="bin_op"/>
+			        		<var label="par_num"/>
+		        		</grp>
+		        		<grp>
+		        			<var label="par_s_quot"/>
+		        			<const label="LIKE"/>
+			        		<const label="'"/>
+			        		<const label="%"/>
+			        		<const label="'"/>
+		        		</grp>
+		        		<grp>
+		        			<var label="par_s_quot"/>
+		        			<const label="NOT"/>
+		        			<const label="LIKE"/>
+			        		<var label="par_s_quot"/>
+		        		</grp>
+		        		<grp>
+		        			<var label="par_s_quot"/>
+		        			<const label="REGEXP"/>
+		        			<const label="'.*'"/>
+		        		</grp>
+	        		</oneof>
+        		<stop/>
+        	</val>
+        </rule>
+        
+        <rule>
+        	<key label="comment"/>
+        	<val>
+        		<start/>
+        			<oneof>
+		        		<const label="#"/>
+		        		<const label="--"/>
+	        		</oneof>
+        		<stop/>
+        	</val>
+        </rule>
+
+        <rule>
+        	<key label="par"/>
+        	<val>
+        		<start/>
+	        		<oneof>
+	        			<var label="par_s"/>
+	        			<var label="par_num"/>
+	        			<var label="db_func"/>
+	        			<var label="db_rec_func"/>
+	        		</oneof>
+        		<stop/>
+        	</val>
+        </rule>
+        
+        <rule>
+        	<key label="par_s"/>
+        	<val>
+        		<start/>
+	        		<oneof>
+	        			<regexp label="[\-a-zA-Z0-9 ,\.\(\)-_/]*"/>
+	        			<var label="par_s_quot"/>
+	        		</oneof>
+        		<stop/>
+        	</val>
+        </rule>
+       
+        <rule>
+        	<key label="par_s_quot"/>
+        	<val>
+        		<start/>
+	        		<oneof>
+	        			<grp>
+	        				<const label="'"/>
+	        				<zorone>
+	        					<regexp label="[\-a-zA-Z0-9 ,\.\(\)-_/]*"/>
+	        				</zorone>
+	        				<const label="'"/>
+	        			</grp>
+	        			<grp>
+	        				<const label="&#34;"/>
+	        				<zorone>
+	        					<regexp label="[\-a-zA-Z0-9 ,\.\(\)-_/]*"/>
+	        				</zorone>
+	        				<const label="&#34;"/>
+	        			</grp>
+	        			<grp>
+	        				<const label="`"/>
+	        				<zorone>
+	        					<regexp label="[\-a-zA-Z0-9 ,\.\(\)-_/]*"/>
+	        				</zorone>
+	        				<const label="`"/>
+	        			</grp>
+	        		</oneof>
+        		<stop/>
+        	</val>
+        </rule>
+        
+        <rule>
+        	<key label="par_num"/>
+        	<val>
+        		<start/>
+        			<regexp label="[0-9]{1,25}"/>
+        		<stop/>
+        	</val>
+        </rule>
+        
+        
+   
+</attackcfg>
