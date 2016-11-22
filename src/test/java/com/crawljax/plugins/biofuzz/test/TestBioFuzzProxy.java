@@ -1,52 +1,6 @@
 package com.crawljax.plugins.biofuzz.test;
 
 
-import static org.junit.Assert.*;
-
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.net.UnknownHostException;
-import java.util.Enumeration;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Vector;
-import java.util.regex.Pattern;
-
-import net.lightbody.bmp.core.har.Har;
-import net.lightbody.bmp.core.har.HarEntry;
-import net.lightbody.bmp.core.har.HarLog;
-import net.lightbody.bmp.core.har.HarPostData;
-import net.lightbody.bmp.core.har.HarPostDataParam;
-import net.lightbody.bmp.core.har.HarRequest;
-import net.lightbody.bmp.proxy.ProxyServer;
-import net.lightbody.bmp.proxy.http.BrowserMobHttpRequest;
-import net.lightbody.bmp.proxy.http.BrowserMobHttpResponse;
-import net.lightbody.bmp.proxy.http.RequestInterceptor;
-import net.lightbody.bmp.proxy.http.ResponseInterceptor;
-import net.lightbody.bmp.proxy.jetty.http.HttpFields;
-import net.lightbody.bmp.proxy.jetty.http.HttpRequest;
-import net.lightbody.bmp.proxy.jetty.util.LineInput;
-import net.lightbody.bmp.proxy.jetty.util.MultiMap;
-
-
-
-import org.junit.Test;
-import org.openqa.selenium.Proxy;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.seleniumhq.jetty7.util.log.Log;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
 import com.codahale.metrics.MetricRegistry;
 import com.crawljax.browser.EmbeddedBrowser;
 import com.crawljax.browser.WebDriverBrowserBuilder;
@@ -54,17 +8,25 @@ import com.crawljax.core.configuration.CrawljaxConfiguration;
 import com.crawljax.core.configuration.CrawljaxConfiguration.CrawljaxConfigurationBuilder;
 import com.crawljax.core.configuration.ProxyConfiguration;
 import com.crawljax.core.plugin.Plugins;
-import com.crawljax.core.state.Identification;
-import com.crawljax.core.state.Identification.How;
-import com.crawljax.plugins.biofuzz.configuration.WebChessInputSpec;
 import com.crawljax.plugins.biofuzz.core.components.BioFuzzAutomation;
 import com.crawljax.plugins.biofuzz.input.BioFuzzFieldInput;
 import com.crawljax.plugins.biofuzz.input.BioFuzzFieldInput.BioFuzzAction;
 import com.crawljax.plugins.biofuzz.input.BioFuzzFieldInputSequence;
-import com.crawljax.plugins.biofuzz.input.BioFuzzInputSpecIface;
-import com.crawljax.plugins.biofuzz.input.BioFuzzInputSpecIface.BioFuzzSpecType;
-import com.crawljax.plugins.biofuzz.utils.BioFuzzUtils;
 import com.crawljax.util.DomUtils;
+import net.lightbody.bmp.core.har.*;
+import net.lightbody.bmp.proxy.ProxyServer;
+import net.lightbody.bmp.proxy.http.BrowserMobHttpRequest;
+import net.lightbody.bmp.proxy.http.RequestInterceptor;
+import org.junit.Test;
+import org.openqa.selenium.Proxy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+
+import java.io.IOException;
+import java.net.UnknownHostException;
+import java.util.List;
 
 public class TestBioFuzzProxy {
 	

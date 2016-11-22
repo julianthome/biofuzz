@@ -3,9 +3,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>com.crawljax.plugins</groupId>
-		<artifactId>crawljax-plugins-parent</artifactId>
-		<version>3.4</version>
+		<groupId>com.crawljax</groupId>
+		<artifactId>crawljax-parent-pom</artifactId>
+		<version>3.6</version>
 	</parent>
 
 	<artifactId>biofuzz-plugin</artifactId>
@@ -46,11 +46,21 @@
 			<artifactId>flex-messaging-core</artifactId>
 			<version>4.7.2</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>${selenium.version}</version>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.2</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.code.findbugs</groupId>
@@ -96,12 +106,17 @@
 			<version>1.11-8</version>
 		</dependency>
 		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<version>2.4.0</version>
+		</dependency>
+		<dependency>
 			<groupId>org.biofuzztk</groupId>
 			<artifactId>biofuzz-tk</artifactId>
 			<version>Alpha</version>
 			<scope>system</scope>
 			<!-- set path here -->
-			<systemPath></systemPath>
+			<systemPath>/Users/julian/Repositories/biofuzz-tk/target/biofuzz-tk-Alpha.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>org.owasp.webscarab</groupId>
@@ -109,7 +124,7 @@
 			<version>20070504-1631</version>
 			<scope>system</scope>
 			<!-- set path here -->
-			<systemPath></systemPath>
+			<systemPath>/Users/julian/Repositories/biofuzz/webscarab-selfcontained-20070504-1631.jar</systemPath>
 		</dependency>
 
 		<dependency>
@@ -145,5 +160,20 @@
 				<filtering>false</filtering>
 			</resource>
 		</resources>
+		<plugins>
+			<plugin>
+				<groupId>pl.project13.maven</groupId>
+				<artifactId>git-commit-id-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<systemPropertyVariables>
+						<test.browser>${test.browser}</test.browser>
+					</systemPropertyVariables>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 </project>

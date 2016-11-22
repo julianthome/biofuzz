@@ -1,0 +1,3 @@
+[submodule "contrib/geckodriver"]
+	path = contrib/geckodriver
+	url = https://github.com/mozilla/geckodriver

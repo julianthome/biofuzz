@@ -1,18 +1,6 @@
 package com.crawljax.plugins.biofuzz.test;
 
-import java.io.IOException;
-
-import org.junit.Test;
-
-import org.owasp.webscarab.httpclient.HTTPClient;
-import org.owasp.webscarab.model.Request;
-import org.owasp.webscarab.model.Response;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-
 import com.crawljax.browser.EmbeddedBrowser;
-
 import com.crawljax.plugins.biofuzz.core.BioFuzzBrowserMgr;
 import com.crawljax.plugins.biofuzz.core.components.BioFuzzAutomation;
 import com.crawljax.plugins.biofuzz.input.BioFuzzFieldInput;
@@ -20,13 +8,13 @@ import com.crawljax.plugins.biofuzz.input.BioFuzzFieldInput.BioFuzzAction;
 import com.crawljax.plugins.biofuzz.input.BioFuzzFieldInputSequence;
 import com.crawljax.plugins.biofuzz.proxy.BioFuzzClient;
 import com.crawljax.plugins.biofuzz.proxy.BioFuzzProxy;
-import com.crawljax.plugins.biofuzz.proxy.BioFuzzProxyMgr.BioFuzzCSPair;
-
 import com.crawljax.plugins.biofuzz.proxy.BioFuzzProxyMgr;
-
+import com.crawljax.plugins.biofuzz.proxy.BioFuzzProxyMgr.BioFuzzCSPair;
 import com.crawljax.plugins.biofuzz.proxy.buffer.BioFuzzConvBuffer;
-import com.crawljax.plugins.biofuzz.proxy.buffer.BioFuzzConvPair;
 import com.crawljax.plugins.biofuzz.proxy.buffer.BioFuzzParamFilter;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TestBioFuzzRequestInterception {
 
@@ -46,9 +34,7 @@ public class TestBioFuzzRequestInterception {
 		
 		BioFuzzBrowserMgr bmgr = new BioFuzzBrowserMgr("http://localhost/webchess9", proxy);
 		proxy.setFilter(new BioFuzzParamFilter());
-		
-		
-	
+
 		
 		EmbeddedBrowser browser1 = bmgr.getBrowser();
 

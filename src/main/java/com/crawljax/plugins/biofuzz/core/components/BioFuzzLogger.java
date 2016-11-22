@@ -9,7 +9,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 
-import mx4j.log.Logger;
 
 
 public class BioFuzzLogger {

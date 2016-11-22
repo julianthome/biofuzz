@@ -38,10 +38,9 @@ public class BioFuzzWebchessArdilla {
 
 		BioFuzzPlugin plugin = new BioFuzzPlugin(ispec,bfCfg);
 		
-		CrawljaxConfigurationBuilder builder = BioFuzzUtils.getConfigBuilderFor("http://localhost/webchess9", ispec, plugin);
+		CrawljaxConfigurationBuilder builder = BioFuzzUtils.getConfigBuilderFor("http://localhost:8081/webchess/index.php", ispec, plugin);
 		
 		CrawljaxConfiguration conf = builder.build();
-		
 		//plugin.startProxy();
 
 		CrawljaxRunner crawljax =

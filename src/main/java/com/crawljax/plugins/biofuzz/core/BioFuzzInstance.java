@@ -1,21 +1,5 @@
 package com.crawljax.plugins.biofuzz.core;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.List;
-
-import java.util.Set;
-import java.util.Vector;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-
-import org.apache.commons.lang.RandomStringUtils;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.crawljax.browser.EmbeddedBrowser;
 import com.crawljax.core.CrawlerContext;
 import com.crawljax.core.state.Eventable;
@@ -32,12 +16,7 @@ import com.crawljax.plugins.biofuzz.core.topology.BioFuzzIndividual.State;
 import com.crawljax.plugins.biofuzz.core.topology.BioFuzzPopulation;
 import com.crawljax.plugins.biofuzz.core.topology.BioFuzzTribe;
 import com.crawljax.plugins.biofuzz.core.topology.BioFuzzWorld;
-import com.crawljax.plugins.biofuzz.input.BioFuzzContentHandler;
-import com.crawljax.plugins.biofuzz.input.BioFuzzFieldInput;
-import com.crawljax.plugins.biofuzz.input.BioFuzzFieldInputSequence;
-import com.crawljax.plugins.biofuzz.input.BioFuzzInputSpecIface;
-import com.crawljax.plugins.biofuzz.input.BioFuzzParamTuple;
-import com.crawljax.plugins.biofuzz.input.BioFuzzProtocolInput;
+import com.crawljax.plugins.biofuzz.input.*;
 import com.crawljax.plugins.biofuzz.proxy.BioFuzzClient;
 import com.crawljax.plugins.biofuzz.proxy.BioFuzzProxy;
 import com.crawljax.plugins.biofuzz.proxy.BioFuzzProxyMgr;
@@ -47,10 +26,20 @@ import com.crawljax.plugins.biofuzz.proxy.buffer.BioFuzzConvPair;
 import com.crawljax.plugins.biofuzz.proxy.buffer.BioFuzzParamFilter;
 import com.crawljax.plugins.biofuzz.utils.BioFuzzFileLogger;
 import com.crawljax.plugins.biofuzz.utils.BioFuzzUtils;
-
-
+import org.apache.commons.lang.RandomStringUtils;
 import org.owasp.webscarab.model.Request;
 import org.owasp.webscarab.model.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Set;
+import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class BioFuzzInstance {
@@ -285,20 +274,18 @@ public class BioFuzzInstance {
 
 		// First go to URL and then fire all events
 		try {
-			URL url = null;
+			URI url = null;
 
 			if (transition == null) {
 				url = context.getConfig().getUrl();
 				logMsg("go to url (no transition): " + url.toString());
 			} else {
-				url = new URL(this.sfg.getInitialState().getUrl());
+
+				url = new URI(this.sfg.getInitialState().getUrl());
 				logMsg("go to url: " + url.toString());
 			}
 			b.goToUrl(url);
-		} catch (MalformedURLException e1) {
-			logMsg("Cannot go to url: " + e1.getMessage());
-			b.close();
-			this.proxy.stopRec();
+		} catch (URISyntaxException e) {
 			return false;
 		}
 		for (Eventable ev: this.evl) {

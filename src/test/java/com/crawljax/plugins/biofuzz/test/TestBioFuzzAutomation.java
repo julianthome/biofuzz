@@ -1,14 +1,7 @@
 package com.crawljax.plugins.biofuzz.test;
 
-import static org.junit.Assert.*;
-
-import java.io.File;
-import java.io.IOException;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
+import com.crawljax.plugins.biofuzz.core.components.BioFuzzAutomation;
+import com.crawljax.plugins.biofuzz.utils.BioFuzzUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,8 +10,11 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import com.crawljax.plugins.biofuzz.core.components.BioFuzzAutomation;
-import com.crawljax.plugins.biofuzz.utils.BioFuzzUtils;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.File;
+import java.io.IOException;
 
 public class TestBioFuzzAutomation {
 	
@@ -33,14 +29,16 @@ public class TestBioFuzzAutomation {
 		try {
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			doc = dBuilder.parse(fXmlFile);
-		} catch (SAXException | IOException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (SAXException e) {
+			e.printStackTrace();
 		}
-		
+
 		assert(doc != null);
 		NodeList list = bauto.xpathRealQuery(doc, "//form[@name='PersonalInfo']//input[@type='text' or @type='password']");
 		Node nod = null;
@@ -55,12 +53,16 @@ public class TestBioFuzzAutomation {
 		Document nDoc = null;
 		try {
 			nDoc = BioFuzzUtils.stringToDom(sDoc);
-		} catch (SAXException | ParserConfigurationException | IOException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			assert(false);
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
 		}
-		
+
 		list = bauto.xpathRealQuery(nDoc, "//form[@name='PersonalInfo']//input[@type='text' or @type='password']");
 		nod = null;
 		for(int i = 0; i < list.getLength(); i++) {

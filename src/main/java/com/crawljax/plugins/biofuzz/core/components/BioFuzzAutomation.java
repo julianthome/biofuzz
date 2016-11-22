@@ -1,33 +1,24 @@
 package com.crawljax.plugins.biofuzz.core.components;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
-
-import org.openqa.selenium.ElementNotVisibleException;
-import org.openqa.selenium.NoSuchElementException;
+import com.crawljax.browser.EmbeddedBrowser;
+import com.crawljax.core.CrawljaxException;
+import com.crawljax.core.state.Eventable;
+import com.crawljax.core.state.Eventable.EventType;
+import com.crawljax.core.state.Identification;
+import com.crawljax.core.state.Identification.How;
+import com.crawljax.core.state.StateVertex;
+import com.crawljax.plugins.biofuzz.input.BioFuzzFieldInput;
+import com.crawljax.plugins.biofuzz.utils.BioFuzzUtils;
+import com.crawljax.util.DomUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
-
-import com.crawljax.browser.EmbeddedBrowser;
-import com.crawljax.core.CrawljaxException;
-import com.crawljax.core.state.Eventable;
-import com.crawljax.core.state.Identification;
-import com.crawljax.core.state.StateVertex;
-import com.crawljax.core.state.Eventable.EventType;
-import com.crawljax.core.state.Identification.How;
-import com.crawljax.plugins.biofuzz.input.BioFuzzFieldInput;
-import com.crawljax.plugins.biofuzz.utils.BioFuzzUtils;
-import com.crawljax.util.DomUtils;
+import javax.xml.xpath.*;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public class BioFuzzAutomation {
 
@@ -218,9 +209,9 @@ public class BioFuzzAutomation {
 			return xpathEvent(browser, vertex, in.getElementId(0), EventType.click);
 		case GO_TO_URL:
 			try {
-				browser.goToUrl(new URL(in.getInputValue()));
+				browser.goToUrl(new URI(in.getInputValue()));
 				return true;
-			} catch (MalformedURLException e) {
+			} catch (URISyntaxException e) {
 				log.debug(e.getMessage());
 				return false;
 			}
@@ -250,9 +241,9 @@ public class BioFuzzAutomation {
 		case GO_TO_URL:
 			log.debug("go to url");
 			try {
-				browser.goToUrl(new URL(in.getInputValue()));
+				browser.goToUrl(new URI(in.getInputValue()));
 				return true;
-			} catch (MalformedURLException e) {
+			} catch (URISyntaxException e) {
 				log.debug(e.getMessage());
 				return false;
 			} 
@@ -271,8 +262,8 @@ public class BioFuzzAutomation {
         boolean isFired = false;
         try {
                 isFired = browser.fireEventAndWait(eventToFire);
-        } catch (ElementNotVisibleException | NoSuchElementException e) {
-                return false;
+        //} catch (ElementNotVisibleException | NoSuchElementException e) {
+         //       return false;
         } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 return false;

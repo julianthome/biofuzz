@@ -1,20 +1,13 @@
 package com.crawljax.plugins.biofuzz.test;
 
-import java.io.IOException;
-
-import org.junit.Test;
-import org.owasp.webscarab.model.Request;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.crawljax.browser.EmbeddedBrowser;
 import com.crawljax.plugins.biofuzz.core.BioFuzzBrowserMgr;
 import com.crawljax.plugins.biofuzz.core.components.BioFuzzAutomation;
 import com.crawljax.plugins.biofuzz.input.BioFuzzContentHandler;
 import com.crawljax.plugins.biofuzz.input.BioFuzzFieldInput;
+import com.crawljax.plugins.biofuzz.input.BioFuzzFieldInput.BioFuzzAction;
 import com.crawljax.plugins.biofuzz.input.BioFuzzFieldInputSequence;
 import com.crawljax.plugins.biofuzz.input.BioFuzzParamTuple;
-import com.crawljax.plugins.biofuzz.input.BioFuzzFieldInput.BioFuzzAction;
 import com.crawljax.plugins.biofuzz.proxy.BioFuzzClient;
 import com.crawljax.plugins.biofuzz.proxy.BioFuzzProxy;
 import com.crawljax.plugins.biofuzz.proxy.BioFuzzProxyMgr;
@@ -23,6 +16,12 @@ import com.crawljax.plugins.biofuzz.proxy.buffer.BioFuzzConvBuffer;
 import com.crawljax.plugins.biofuzz.proxy.buffer.BioFuzzConvPair;
 import com.crawljax.plugins.biofuzz.proxy.buffer.BioFuzzParamFilter;
 import com.crawljax.plugins.biofuzz.utils.BioFuzzUtils;
+import org.junit.Test;
+import org.owasp.webscarab.model.Request;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
 
 public class TestBioFuzzContentHandler {
 	
@@ -33,6 +32,8 @@ public class TestBioFuzzContentHandler {
 	@Test
 	public void test() {
 
+		System.setProperty("webdriver.gecko.driver",
+				"/Users/julian/Downloads/geckodriver");
 		//BioFuzzBrowserMgr mgr = new BioFuzzBrowserMgr("http://localhost/webchess9", "127.0.0.1", 8084);
 
 		BioFuzzProxyMgr pmgr = BioFuzzProxyMgr.getInstance("127.0.0.1", 8084);
@@ -44,7 +45,8 @@ public class TestBioFuzzContentHandler {
 		
 		BioFuzzClient client = cpair.getClient();
 		
-		BioFuzzBrowserMgr bmgr = new BioFuzzBrowserMgr("http://localhost/webchess9", proxy);
+		BioFuzzBrowserMgr bmgr = new BioFuzzBrowserMgr
+				("http://localhost:8081/webchess/index.php", proxy);
 		proxy.setFilter(new BioFuzzParamFilter());
 		
 
@@ -54,7 +56,7 @@ public class TestBioFuzzContentHandler {
 		BioFuzzFieldInputSequence iseq = new BioFuzzFieldInputSequence("//FORM[@name='loginForm']","//FORM[@name='loginForm']");
 
 
-		BioFuzzFieldInput i0 = new BioFuzzFieldInput(BioFuzzAction.GO_TO_URL, "http://localhost/webchess9");
+		BioFuzzFieldInput i0 = new BioFuzzFieldInput(BioFuzzAction.GO_TO_URL, "http://localhost:8081/webchess/index.php");
 		BioFuzzFieldInput i1 = new BioFuzzFieldInput("//FORM//INPUT[@name='txtNick']",BioFuzzAction.TEXT_INPUT, "webchess");
 		BioFuzzFieldInput i2 = new BioFuzzFieldInput("//FORM//INPUT[@name='pwdPassword']",BioFuzzAction.TEXT_INPUT, "webchess");
 		BioFuzzFieldInput i3 = new BioFuzzFieldInput("//FORM//INPUT[@type='submit']",BioFuzzAction.CLICK);
