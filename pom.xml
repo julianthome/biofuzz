@@ -116,7 +116,7 @@
 			<version>Alpha</version>
 			<scope>system</scope>
 			<!-- set path here -->
-			<systemPath>/Users/julian/Repositories/biofuzz-tk/target/biofuzz-tk-Alpha.jar</systemPath>
+			<systemPath></systemPath>
 		</dependency>
 		<dependency>
 			<groupId>org.owasp.webscarab</groupId>
@@ -124,7 +124,7 @@
 			<version>20070504-1631</version>
 			<scope>system</scope>
 			<!-- set path here -->
-			<systemPath>/Users/julian/Repositories/biofuzz/webscarab-selfcontained-20070504-1631.jar</systemPath>
+			<systemPath></systemPath>
 		</dependency>
 
 		<dependency>
