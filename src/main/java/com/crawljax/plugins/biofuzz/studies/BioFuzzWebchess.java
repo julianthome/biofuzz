@@ -2,13 +2,12 @@ package com.crawljax.plugins.biofuzz.studies;
 
 import com.crawljax.core.CrawljaxRunner;
 import com.crawljax.core.configuration.CrawljaxConfiguration;
-import com.crawljax.core.configuration.ProxyConfiguration;
 import com.crawljax.core.configuration.CrawljaxConfiguration.CrawljaxConfigurationBuilder;
+import com.crawljax.core.configuration.ProxyConfiguration;
 import com.crawljax.plugins.biofuzz.configuration.WebChessArdillaInputSpec;
-import com.crawljax.plugins.biofuzz.configuration.WebChessInputSpec;
+import com.crawljax.plugins.biofuzz.core.BioFuzzFitness.BioFuzzFitnessScalar;
 import com.crawljax.plugins.biofuzz.core.BioFuzzPlugin;
 import com.crawljax.plugins.biofuzz.core.BioFuzzPluginConfig;
-import com.crawljax.plugins.biofuzz.core.BioFuzzFitness.BioFuzzFitnessScalar;
 import com.crawljax.plugins.biofuzz.input.BioFuzzInputSpecIface;
 
 
@@ -18,7 +17,9 @@ public class BioFuzzWebchess {
 	private static BioFuzzInputSpecIface ispec = null;
 
 	public static void main(String[] args) {
-		CrawljaxConfigurationBuilder builder = CrawljaxConfiguration.builderFor("http://localhost/webchess9");
+		System.setProperty("webdriver.gecko.driver",
+				"/Users/julian/Downloads/geckodriver");
+		CrawljaxConfigurationBuilder builder = CrawljaxConfiguration.builderFor("http://localhost:8081/webchess/");
 		builder.crawlRules().insertRandomDataInInputForms(false);
 		
 		ispec = new WebChessArdillaInputSpec();
