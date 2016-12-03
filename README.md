@@ -24,7 +24,7 @@ For compiling biofuzz, please perform the following steps:
 
 ```bash
 git clone https://github.com/julianthome/biofuzz.git
-cd biofuzz.git
+cd biofuzz
 ```
 
 After that please modifiy the `pom.xml` file by filling-in the absolute paths of the webscarab and biofuzz-tk jar files.
@@ -92,7 +92,7 @@ You can install WebChess by opening a Web browser and going the the URL `http://
 the installation procedure you should be able to see the following login screen
 after opening the URL `http://localhost/webchess`.
 
-![](https://dropit.uni.lu/invitations?share=36728949612fe0a95a08&dl=1)
+![](http://dropit.uni.lu/invitations?share=36728949612fe0a95a08&dl=1)
 
 
 ## Database logger
@@ -112,6 +112,7 @@ one could execute the following commands:
 ```bash
 apt-get source php5_mysql
 tar xvf php5_5.3.10.orig.tar.gz
+cd php-5.3.10
 ./configure --with-config-file-path=/etc/php5/apache2 --with-config-file-scan-dir=/etc/php5/apache2/conf.d --sysconfdir=/etc --localstatedir=/var --mandir=/usr/share/man --disable-debug --with-regex=php --disable-rpath --disable-static --with-pic --with-layout=GNU --with-pear=/usr/share/php --enable-sysvsem --enable-sysvshm --enable-sysvmsg --enable-bcmath --with-bz2 --enable-ctype --without-gdbm --with-iconv --with-gettext --enable-mbstring --enable-shmop --enable-sockets --enable-wddx --with-libxml-dir=/usr --with-zlib --with-kerberos=/usr --with-openssl --enable-zip --with-mhash=yes --with-exec-dir=/usr/lib/php5/libexec --with-mysql-sock=/var/run/mysqld/mysqld.sock --with-mysql=shared,/usr --with-pdo-mysql=shared,/usr --with-mysqli=shared,/usr/bin/mysql_config --with-libdir=/lib/i386-linux-gnu/
 ```
 
