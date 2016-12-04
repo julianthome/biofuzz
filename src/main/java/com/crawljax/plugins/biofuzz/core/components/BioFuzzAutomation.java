@@ -17,8 +17,10 @@ import org.w3c.dom.NodeList;
 
 import javax.xml.xpath.*;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 
 public class BioFuzzAutomation {
 
@@ -110,7 +112,7 @@ public class BioFuzzAutomation {
 	}
 	
 	private boolean xpathInput(EmbeddedBrowser browser, String path, String value) {
-		log.debug("xpathInput(EmbeddedBrowser browser, String path, String value)");
+		log.info("xpathInput(EmbeddedBrowser browser, String path, String value)");
 		assert(browser != null);
 		Document doc = null;
 
@@ -127,11 +129,12 @@ public class BioFuzzAutomation {
 			id.setHow(How.xpath);
 			id.setValue(path);
 			try {
-				log.debug("Browser input\n");
-				
+				log.info("Browser input\n");
+				log.info(How.xpath.toString());
+				log.info(path);
 				return browser.input(id, value);
 			} catch (CrawljaxException e) {
-				log.debug(e.getMessage());
+				log.info(e.getMessage());
 				return false;
 			}
 		}
@@ -209,10 +212,10 @@ public class BioFuzzAutomation {
 			return xpathEvent(browser, vertex, in.getElementId(0), EventType.click);
 		case GO_TO_URL:
 			try {
-				browser.goToUrl(new URI(in.getInputValue()));
+				browser.goToUrl(new URL(in.getInputValue()));
 				return true;
-			} catch (URISyntaxException e) {
-				log.debug(e.getMessage());
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
 				return false;
 			}
 		}
@@ -221,17 +224,17 @@ public class BioFuzzAutomation {
 	}
 	
 	public boolean executeInput(EmbeddedBrowser browser,BioFuzzFieldInput in) {
-		log.debug("executeInput(EmbeddedBrowser browser,Input in)");
+		log.info("executeInput(EmbeddedBrowser browser,Input in)");
 		assert(browser != null);
 		assert(in != null);
 		
 		switch(in.getAction()) {
 		case TEXT_INPUT:
-			log.debug("text input");
+			log.info("text input");
 			boolean ret = true;
 			for(String elementId : in.getElementIds()) {
 				log.debug("execute input for" + elementId);
-				ret = ret & xpathInput(browser, elementId, in.getInputValue());
+				ret = ret && xpathInput(browser, elementId, in.getInputValue());
 			}
 			return ret;
 		case CLICK:
@@ -241,10 +244,10 @@ public class BioFuzzAutomation {
 		case GO_TO_URL:
 			log.debug("go to url");
 			try {
-				browser.goToUrl(new URI(in.getInputValue()));
+				browser.goToUrl(new URL(in.getInputValue()));
 				return true;
-			} catch (URISyntaxException e) {
-				log.debug(e.getMessage());
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
 				return false;
 			} 
 		default:

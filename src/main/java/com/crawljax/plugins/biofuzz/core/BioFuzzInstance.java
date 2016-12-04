@@ -33,8 +33,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.List;
 import java.util.Set;
 import java.util.Vector;
@@ -62,7 +64,7 @@ public class BioFuzzInstance {
 	private Eventable transition = null;
 	private CrawlerContext context = null; 
 	private BioFuzzAutomation bauto = null;
-
+ 
 
 	private BioFuzzInputSpecIface ispec = null;
 	private BioFuzzWorld bworld = null;
@@ -113,7 +115,8 @@ public class BioFuzzInstance {
 
 	public BioFuzzInstance(CrawlerContext context,
 			BioFuzzInputSpecIface ispec, BioFuzzWorld world, BioFuzzPluginConfig conf) {
-
+		System.setProperty("webdriver.gecko.driver",
+				"/home/biofuzz/files/geckodriver");
 		this.flog = new BioFuzzFileLogger("/tmp/biofuzz/",RandomStringUtils.randomAlphanumeric(5).toUpperCase());
 
 		this.bauto = new BioFuzzAutomation();
@@ -165,7 +168,8 @@ public class BioFuzzInstance {
 	public BioFuzzInstance(String url, BioFuzzFieldInputSequence iseq,
 			BioFuzzInputSpecIface ispec, BioFuzzWorld world, BioFuzzPluginConfig conf) {
 
-
+		System.setProperty("webdriver.gecko.driver",
+				"/home/biofuzz/files/geckodriver");
 		this.iseq = iseq;
 		this.sfg = null;
 		this.bauto = new BioFuzzAutomation();		
@@ -233,9 +237,12 @@ public class BioFuzzInstance {
 		// both of these functions are requiring sync since they
 		// are triggering SQL statements
 
+		logMsg("go to target state with browser");
 		boolean ret = false;
 		EmbeddedBrowser b = this.bmgr.getBrowser();
 
+		assert this.proxy != null;
+		
 		this.proxy.startRec();
 		if(this.sfg == null && this.iseq != null) {
 			ret = goToStartStateIseq(b);
@@ -274,18 +281,19 @@ public class BioFuzzInstance {
 
 		// First go to URL and then fire all events
 		try {
-			URI url = null;
+			URL url = null;
 
 			if (transition == null) {
 				url = context.getConfig().getUrl();
 				logMsg("go to url (no transition): " + url.toString());
 			} else {
 
-				url = new URI(this.sfg.getInitialState().getUrl());
+				url = new URL(this.sfg.getInitialState().getUrl());
 				logMsg("go to url: " + url.toString());
 			}
 			b.goToUrl(url);
-		} catch (URISyntaxException e) {
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
 			return false;
 		}
 		for (Eventable ev: this.evl) {
@@ -324,10 +332,10 @@ public class BioFuzzInstance {
 		flog.write(s);
 	}
 
-	private String[] submitAndRead(Request req) {
+	private synchronized String[] submitAndRead(Request req) {
 		String stmts = "";
 
-		//synchronized(bflogLock) {
+		
 		bflog.reset();
 
 		this.proxy.startRec();
@@ -353,6 +361,8 @@ public class BioFuzzInstance {
 		stmts = bflog.cut();
 		logMsg("reading end");
 
+		
+		logMsg("got stmtms " + stmts);
 		if(stmts == null) {
 			logMsg("shouldn't happen");
 			return null;
@@ -466,6 +476,7 @@ public class BioFuzzInstance {
 			}
 
 		} else {
+			logMsg("nothing found");
 			ind.setFitness(FitnessCriterion.LOGGER_LDIST, 0.0);
 		}
 
@@ -505,13 +516,16 @@ public class BioFuzzInstance {
 
 		// Associate a query with the given input
 		boolean found = false;
+	
+		
 		for (String stmt : sqlOut) {
-
+			logMsg("measure dist " + stmt);
 			if(measureDistance(ind, stmt, iter) == true) {
 				found = true;
 				break;
 			}
 		}
+
 
 
 		if(!found)
@@ -880,7 +894,7 @@ public class BioFuzzInstance {
 				if(ind.getState() == State.IMMATURE) {
 
 					if(ind.getFvalForCriterion(FitnessCriterion.LOGGER_LDIST) == 1.0 ) {
-
+						
 						logMsg("Evolve Individual");
 						this.bpop.evolveIndividual(ind);
 

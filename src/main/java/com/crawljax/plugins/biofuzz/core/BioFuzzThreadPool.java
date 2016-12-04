@@ -53,7 +53,7 @@ public class BioFuzzThreadPool {
 	}
 	
 	public boolean submitAll() {
-
+		logger.debug("submit all");
 		// Execute the first phase
 		for(int i = 0; i < threadQueue0.size(); i++) {
 			BioFuzzInstance inst = threadQueue0.get(i);

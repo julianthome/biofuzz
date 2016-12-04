@@ -28,7 +28,7 @@ public class TestBioFuzzParser {
 	static List<BioFuzzParseTree> tLst0 = null;
 	@Test
 	public void test() {
-		mgr = new BioFuzzMgr("cfg.xml", new BioFuzzSQLTokenizer());
+		mgr = new BioFuzzMgr("src/main/resources/cfg.xml", new BioFuzzSQLTokenizer());
 		assert(mgr != null);
 		
 		BioFuzzAttackCfgMgr m = mgr.getAtackCfgMgr();

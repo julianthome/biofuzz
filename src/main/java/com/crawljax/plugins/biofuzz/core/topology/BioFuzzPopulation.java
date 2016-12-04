@@ -17,7 +17,7 @@ import org.biofuzztk.cfg.BioFuzzAttackTag.TagType;
 import org.biofuzztk.ptree.BioFuzzParseTree;
 import org.biofuzztk.ptree.BioFuzzTokLst;
 import org.biofuzztk.components.BioFuzzMgr;
-
+import org.biofuzztk.components.tokenizer.BioFuzzSQLTokenizer;
 
 import com.crawljax.plugins.biofuzz.core.BioFuzzDBSchema;
 import com.crawljax.plugins.biofuzz.core.BioFuzzFitness.BioFuzzFitnessScalar;
@@ -58,7 +58,7 @@ public class BioFuzzPopulation {
 		// get manager from world in order to perform operations
 		//this.mgr = this.world.getMgr();
 		// @TODO: find a better solution for that - for now every pop gets its own mgr
-		this.mgr = new BioFuzzMgr("cfg.xml");
+		this.mgr = new BioFuzzMgr("src/main/resources/cfg.xml", new BioFuzzSQLTokenizer());
 		this.fscal = this.world.getFscal();
 		this.ntSum = 0;
 		this.cpSum = 0;

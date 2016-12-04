@@ -9,6 +9,7 @@ import com.crawljax.core.CrawljaxRunner;
 import com.crawljax.core.configuration.CrawljaxConfiguration;
 import com.crawljax.core.configuration.CrawljaxConfiguration.CrawljaxConfigurationBuilder;
 import com.crawljax.plugins.biofuzz.configuration.WebChessArdillaInputSpec;
+import com.crawljax.plugins.biofuzz.configuration.WebChessInputSpec;
 import com.crawljax.plugins.biofuzz.core.BioFuzzPlugin;
 import com.crawljax.plugins.biofuzz.core.BioFuzzPluginConfig;
 import com.crawljax.plugins.biofuzz.core.BioFuzzFitness.BioFuzzFitnessScalar;
@@ -19,11 +20,14 @@ import com.crawljax.plugins.biofuzz.utils.BioFuzzUtils;
 public class BioFuzzWebchessArdilla {
 	
 	private static final Logger logger = LoggerFactory.getLogger(BioFuzzWebchessArdilla.class);
-	private static BioFuzzInputSpecIface ispec = null;
+	private static WebChessInputSpec ispec = null;
 
 	public static void main(String[] args) {
 		
-		ispec = new WebChessArdillaInputSpec();
+		
+		System.setProperty("webdriver.gecko.driver",
+				"/home/biofuzz/files/geckodriver");
+		ispec = new WebChessInputSpec();
 
 		BioFuzzPluginConfig bfCfg = new BioFuzzPluginConfig();
 		
@@ -38,7 +42,7 @@ public class BioFuzzWebchessArdilla {
 
 		BioFuzzPlugin plugin = new BioFuzzPlugin(ispec,bfCfg);
 		
-		CrawljaxConfigurationBuilder builder = BioFuzzUtils.getConfigBuilderFor("http://localhost:8081/webchess/index.php", ispec, plugin);
+		CrawljaxConfigurationBuilder builder = BioFuzzUtils.getConfigBuilderFor("http://localhost/webchess", ispec, plugin);
 		
 		CrawljaxConfiguration conf = builder.build();
 		//plugin.startProxy();

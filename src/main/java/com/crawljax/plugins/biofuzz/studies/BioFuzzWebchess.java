@@ -18,8 +18,8 @@ public class BioFuzzWebchess {
 
 	public static void main(String[] args) {
 		System.setProperty("webdriver.gecko.driver",
-				"/Users/julian/Downloads/geckodriver");
-		CrawljaxConfigurationBuilder builder = CrawljaxConfiguration.builderFor("http://localhost:8081/webchess/");
+				"/home/biofuzz/files/geckodriver");
+		CrawljaxConfigurationBuilder builder = CrawljaxConfiguration.builderFor("http://localhost/webchess/");
 		builder.crawlRules().insertRandomDataInInputForms(false);
 		
 		ispec = new WebChessArdillaInputSpec();
@@ -33,7 +33,7 @@ public class BioFuzzWebchess {
 		BioFuzzPluginConfig bfCfg = new BioFuzzPluginConfig();
 		
 		bfCfg.setTribes(4);
-		bfCfg.setMaxIter(10);
+		bfCfg.setMaxIter(12);
 		bfCfg.setCrossoverCycle(2);
 		bfCfg.setCrossoverCnt(2);
 		bfCfg.setCrossoverOffset(4);

@@ -33,7 +33,7 @@ public class TestBioFuzzContentHandler {
 	public void test() {
 
 		System.setProperty("webdriver.gecko.driver",
-				"/Users/julian/Downloads/geckodriver");
+				"/home/biofuzz/files/geckodriver");
 		//BioFuzzBrowserMgr mgr = new BioFuzzBrowserMgr("http://localhost/webchess9", "127.0.0.1", 8084);
 
 		BioFuzzProxyMgr pmgr = BioFuzzProxyMgr.getInstance("127.0.0.1", 8084);
@@ -46,7 +46,7 @@ public class TestBioFuzzContentHandler {
 		BioFuzzClient client = cpair.getClient();
 		
 		BioFuzzBrowserMgr bmgr = new BioFuzzBrowserMgr
-				("http://localhost:8081/webchess/index.php", proxy);
+				("http://localhost/webchess/index.php", proxy);
 		proxy.setFilter(new BioFuzzParamFilter());
 		
 

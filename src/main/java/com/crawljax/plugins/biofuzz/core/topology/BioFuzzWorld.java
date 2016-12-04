@@ -31,7 +31,7 @@ public class BioFuzzWorld {
 	
 	
 	public BioFuzzWorld(BioFuzzFitnessScalar fvect) {
-		this.mgr = new BioFuzzMgr("cfg.xml", new BioFuzzSQLTokenizer());
+		this.mgr = new BioFuzzMgr("src/main/resources/cfg.xml", new BioFuzzSQLTokenizer());
 		this.fscal = fvect;
 		pops = new Vector<BioFuzzPopulation>();
 		dbSchema = new BioFuzzDBSchema();

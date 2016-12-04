@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.crawljax</groupId>
 		<artifactId>crawljax-parent-pom</artifactId>
-		<version>3.6</version>
+		<version>3.4</version>
 	</parent>
 
 	<artifactId>biofuzz-plugin</artifactId>
@@ -116,7 +116,7 @@
 			<version>Alpha</version>
 			<scope>system</scope>
 			<!-- set path here -->
-			<systemPath></systemPath>
+			<systemPath>/home/biofuzz/files/biofuzz-tk-Alpha.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>org.owasp.webscarab</groupId>
@@ -124,7 +124,7 @@
 			<version>20070504-1631</version>
 			<scope>system</scope>
 			<!-- set path here -->
-			<systemPath></systemPath>
+			<systemPath>/home/biofuzz/files/webscarab-selfcontained-20070504-1631.jar</systemPath>
 		</dependency>
 
 		<dependency>

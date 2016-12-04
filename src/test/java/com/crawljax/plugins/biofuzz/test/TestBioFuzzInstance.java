@@ -5,6 +5,8 @@ import java.util.Vector;
 import java.util.concurrent.CyclicBarrier;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.crawljax.plugins.biofuzz.configuration.ElemataInputSpec;
 import com.crawljax.plugins.biofuzz.configuration.FaqForgeInputSpec;
@@ -25,71 +27,22 @@ import com.crawljax.plugins.biofuzz.proxy.BioFuzzProxyMgr;
 import com.crawljax.plugins.biofuzz.proxy.buffer.BioFuzzParamFilter;
 import com.crawljax.plugins.biofuzz.core.topology.BioFuzzWorld;
 
+
+
 public class TestBioFuzzInstance {
-
-	//@Test
-	public void test0() {
-		
-		SchoolMateInputSpec ispec = new SchoolMateInputSpec();
-		
-		BioFuzzPluginConfig bfCfg = new BioFuzzPluginConfig();
-		
-		bfCfg.setTribes(3);
-		bfCfg.setMaxIter(20);
-		bfCfg.setCrossoverCycle(2);
-		bfCfg.setCrossoverCnt(2);
-		bfCfg.setCrossoverOffset(5);
-		bfCfg.setParserMatchMax(2);
-		
-		// Create an initial proxy
-		BioFuzzProxyMgr pMgr = BioFuzzProxyMgr.getInstance("127.0.0.1", 8084);
-
-		BioFuzzProxy proxy = pMgr.createAndGetProxy();
-		proxy.setFilter(new BioFuzzParamFilter());
-		
-		bfCfg.setFscal(new BioFuzzFitnessScalar(1,1,1,1));
-
-		BioFuzzPlugin plugin = new BioFuzzPlugin(ispec,bfCfg);
-		
-		List<BioFuzzFieldInputSequence> liseq = ispec.getInputSequences();
-		
-		BioFuzzWorld world = new BioFuzzWorld(new BioFuzzFitnessScalar(1,1,1,1));
-		
-		BioFuzzThreadPool pool = BioFuzzThreadPool.getInstance();
-
-		BioFuzzInstance inst0 = new BioFuzzInstance("http://localhost/schoolmate",liseq.get(0),ispec,world,bfCfg);
-		BioFuzzInstance inst1 = new BioFuzzInstance("http://localhost/schoolmate",liseq.get(1),ispec,world,bfCfg);
-		BioFuzzInstance inst2 = new BioFuzzInstance("http://localhost/schoolmate",liseq.get(2),ispec,world,bfCfg);
-		BioFuzzInstance inst3 = new BioFuzzInstance("http://localhost/schoolmate",liseq.get(3),ispec,world,bfCfg);
-		
-		pool.registerThread(inst0);
-		pool.registerThread(inst1);
-		pool.registerThread(inst2);		
-		pool.registerThread(inst3);
-		//pool.registerThread(inst0);
-//		pool.registerThread(inst1);
-//		pool.registerThread(inst2);
-
-		
-		try {
-			pool.submitAll();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
-
+	
+	private static final Logger log = LoggerFactory
+			.getLogger(TestBioFuzzInstance.class);
 	
 	@Test
 	public void test1() {
 		
-		ElemataInputSpec ispec = new ElemataInputSpec();
+		WebChessArdillaInputSpec ispec = new WebChessArdillaInputSpec();
 		
 		BioFuzzPluginConfig bfCfg = new BioFuzzPluginConfig();
 		
-		bfCfg.setTribes(10);
-		bfCfg.setMaxIter(20);
+		bfCfg.setTribes(1);
+		bfCfg.setMaxIter(2);
 		bfCfg.setCrossoverCycle(2);
 		bfCfg.setCrossoverCnt(2);
 		bfCfg.setCrossoverOffset(5);
@@ -98,35 +51,42 @@ public class TestBioFuzzInstance {
 
 		
 		// Create an initial proxy
-		BioFuzzProxyMgr pMgr = BioFuzzProxyMgr.getInstance("127.0.0.1", 8084);
+		//BioFuzzProxyMgr pMgr = BioFuzzProxyMgr.getInstance("127.0.0.1", 8084);
 
-		BioFuzzProxy proxy = pMgr.createAndGetProxy();
-		proxy.setFilter(new BioFuzzParamFilter());
+		//BioFuzzProxy proxy = pMgr.createAndGetProxy();
+		//proxy.setFilter(new BioFuzzParamFilter());
 		
 		bfCfg.setFscal(new BioFuzzFitnessScalar(1,2,2,3));
 
 		BioFuzzPlugin plugin = new BioFuzzPlugin(ispec,bfCfg);
 		
-		List<BioFuzzFieldInputSequence> liseq = ispec.getInputSequences();
+		//List<BioFuzzFieldInputSequence> liseq = ispec.getInputSequences();
 		
 		BioFuzzWorld world = new BioFuzzWorld(new BioFuzzFitnessScalar(1,1,1,1));
 		
 		BioFuzzThreadPool pool = BioFuzzThreadPool.getInstance();
 
-		BioFuzzInstance inst0 = new BioFuzzInstance("http://localhost/elemata/login.php",ispec.getInputSequences().get(0),ispec,world,bfCfg);
+		BioFuzzInstance inst0 = new BioFuzzInstance("http://localhost/webchess",ispec.getInputSequences().get(0),ispec,world,bfCfg);
 
+	
+		inst0.phase0();
+		inst0.phase1();
 		
-		pool.registerThread(inst0);
+		log.info("Phase 2 ===================");
+		
+		inst0.phase2();
+		
+		//pool.registerThread(inst0);
 
-		proxy.startRec();
+		//proxy.startRec();
 		
-		try {
-			pool.submitAll();
-		} catch (Exception e) {
+		//try {
+		//	pool.submitAll();
+		//} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		proxy.stopRec();
+		//	e.printStackTrace();
+		//}
+		//proxy.stopRec();
 		
 	}
 }
