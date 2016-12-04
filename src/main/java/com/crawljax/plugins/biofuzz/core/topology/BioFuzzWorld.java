@@ -1,24 +1,19 @@
 package com.crawljax.plugins.biofuzz.core.topology;
 
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.Vector;
-
+import com.crawljax.plugins.biofuzz.core.BioFuzzDBSchema;
+import com.crawljax.plugins.biofuzz.core.BioFuzzFitness.BioFuzzFitnessScalar;
+import com.crawljax.plugins.biofuzz.input.BioFuzzParamTuple;
+import com.crawljax.plugins.biofuzz.utils.BioFuzzFileLogger;
+import org.biofuzztk.cfg.BioFuzzAttackTag.TagType;
 import org.biofuzztk.components.BioFuzzMgr;
 import org.biofuzztk.components.BioFuzzTracer.BioFuzzQuery;
 import org.biofuzztk.components.BioFuzzTracer.TraceType;
-import org.biofuzztk.ptree.BioFuzzParseTree;
+import org.biofuzztk.components.tokenizer.BioFuzzSQLTokenizer;
 import org.biofuzztk.ptree.BioFuzzParseNode;
-import org.biofuzztk.cfg.BioFuzzAttackTag.TagType;
+import org.biofuzztk.ptree.BioFuzzParseTree;
 
-import com.crawljax.plugins.biofuzz.core.BioFuzzDBSchema;
-import com.crawljax.plugins.biofuzz.core.BioFuzzFitness.BioFuzzFitnessScalar;
-
-import com.crawljax.plugins.biofuzz.input.BioFuzzParamTuple;
-import com.crawljax.plugins.biofuzz.utils.BioFuzzFileLogger;
+import java.util.*;
 
 public class BioFuzzWorld {
 
@@ -36,7 +31,7 @@ public class BioFuzzWorld {
 	
 	
 	public BioFuzzWorld(BioFuzzFitnessScalar fvect) {
-		this.mgr = new BioFuzzMgr("cfg.xml");
+		this.mgr = new BioFuzzMgr("cfg.xml", new BioFuzzSQLTokenizer());
 		this.fscal = fvect;
 		pops = new Vector<BioFuzzPopulation>();
 		dbSchema = new BioFuzzDBSchema();
