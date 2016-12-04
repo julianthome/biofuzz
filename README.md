@@ -79,7 +79,7 @@ mv webchess/ /var/www/
 chown -R www-data:www-data /var/www/webchess/
 ```
 
-WebChess could be installed by opening the URL `http://localhost/webchess/install` in a browser and by following the installation procedure.
+WebChess could be installed by opening the URL `http://localhost/webchess/install.php` in a browser and by following the installation procedure.
 
 ## Database logger
 
