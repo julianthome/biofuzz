@@ -2,7 +2,7 @@
 
 # Installation
 
-A ready-to-use VirtualBox image of BioFuzz together with WebChess (one of the test subjects) is available [here](https://dropit.uni.lu/invitations?share=5652547adaabff7db807&dl=1). The login for authentication is user `biofuzz` with password `biofuzz`. For getting an idea how BioFuzz can be used [this screencast](https://dropit.uni.lu/invitations?share=babfb75907a530b2606b&dl=1) may be helpful. The remainder of this documentation illustrates the local installation of BioFuzz.
+A ready-to-use VirtualBox image of BioFuzz together with WebChess (one of the test subjects) is available [here](https://dropit.uni.lu/invitations?share=5652547adaabff7db807&dl=1). The login for authentication is user `biofuzz` with password `biofuzz`. [This screencast](https://dropit.uni.lu/invitations?share=babfb75907a530b2606b&dl=1) may help to get an idea of how BioFuzz can be used. The remainder of this documentation illustrates the local installation of BioFuzz.
 
 ## BioFuzz toolkit Installation
 
@@ -15,13 +15,13 @@ git clone https://github.com/julianthome/biofuzz-tk.git
 cd biofuzz-tk/
 mvn package
 ```
-After those steps, the file `target/biofuzz-tk-Alpha.jar` should be available.
+After those steps are completed, the file `target/biofuzz-tk-Alpha.jar` should be available.
 
 ## Compiling BioFuzz
 
-BioFuzz itself is a [Crawljax](http://crawljax.com/) plugin and depends on [WebScarab](https://www.owasp.org/index.php/Category:OWASP_WebScarab_Project) which is a HTTP proxy that captures all of the requests that are being exchanged between the Web client and the Web server. Unfortunately, WebScarab is not available on Maven central, but the jar file can be downloaded from [here](https://dropit.uni.lu/invitations?share=724dad6076fae28cef15&dl=1).
+BioFuzz itself is a [Crawljax](http://crawljax.com/) plugin and depends on [WebScarab](https://www.owasp.org/index.php/Category:OWASP_WebScarab_Project) which is a HTTP proxy that captures all of the requests that are being exchanged between the Web client and the Web server. Unfortunately, WebScarab is not available on Maven central, but the jar file may be downloaded [here](https://dropit.uni.lu/invitations?share=724dad6076fae28cef15&dl=1).
 
-For compiling BioFuzz, the following commands have to be executed:
+To compile BioFuzz, the following commands have to be executed:
 
 ```bash
 git clone https://github.com/julianthome/biofuzz.git
@@ -51,9 +51,9 @@ After that, the absolute paths of WebScarab and the BioFuzz toolkit have to be s
 
 ## Gekko
 For web browser automation, BioFuzz requires the geckodriver. The latest
-version can be downloaded from [here](https://github.com/mozilla/geckodriver/releases).
+version can be downloaded [here](https://github.com/mozilla/geckodriver/releases).
 Unfortunately, the location of the geckodriver has to be set manually by
-adding `System.setProperty("webdriver.gecko.driver”, <path to geckodriver>);` in the source code to point to the appropriate location.
+adding `System.setProperty("webdriver.gecko.driver”, <path to geckodriver>);` to the source code to point to the appropriate location.
 
 Afterwards, one should be able to execute `TestBioFuzzContentHandler`.
 The test case will automatically authenticate a user `webchess` with his
@@ -62,16 +62,16 @@ password `webchess`.
 
 ## Test subject Installation
 
-The WebChess test subject can be downloaded from [here](https://dropit.uni.lu/invitations?share=012ccd31f72b9176d8c2&dl=1) and its installation is explained in the following.
+The WebChess test subject can be downloaded [here](https://dropit.uni.lu/invitations?share=012ccd31f72b9176d8c2&dl=1) and its installation is explained in the following.
 
-For running WebChess, the database has to be created first:
+To run WebChess, first the database has to be created:
 
 ```sql
 CREATE DATABASE webchess;
 GRANT ALL PRIVILEGES ON webchess.* TO 'webchess'@'localhost' IDENTIFIED BY 'webchess';
 ```
 
-After downloading WebChess from [here](https://dropit.uni.lu/invitations?share=012ccd31f72b9176d8c2&dl=1), it could be installed by executing the following commands:
+After downloading WebChess [here](https://dropit.uni.lu/invitations?share=012ccd31f72b9176d8c2&dl=1), it may be installed by executing the following commands:
 
 ```bash
 unzip WebChess_1.0.0rc2.zip
@@ -79,7 +79,7 @@ mv webchess/ /var/www/
 chown -R www-data:www-data /var/www/webchess/
 ```
 
-WebChess could be installed by opening the URL `http://localhost/webchess/install.php` in a browser and by following the installation procedure.
+WebChess can be installed by opening the URL `http://localhost/webchess/install.php` in a browser and by following the installation procedure.
 
 ## Database logger
 
@@ -88,11 +88,10 @@ exchanged between the Web server and the DBMS. For this purpose we
 have instrumented the `php_mysql` module. The steps necessary to get
 access to the database statements are illustrated in the following.
 The explanations are based on Ubuntu 12.02. Note that BioFuzz expects the
-database queries to be logged to `/tmp/logger.log` and does not care about
-the logger that is being used.
+database queries to be logged to `/tmp/logger.log` and does not depend on any specific logger.
 
-For getting the sources, and for preparing the built of the php MySQL module,
-one could execute the following commands:
+To get the sources, and to prepare the built of the php MySQL module,
+one may execute the following commands:
 
 ```bash
 apt-get source php5_mysql
@@ -102,7 +101,7 @@ cd php-5.3.10
 ```
 
 Afterwards, the file `php_mysql.c` has to be changed such that all the database
-queries are logged to `/tmp/logger.log`. For getting an idea how to modify the module, please have a look the the patch file which can be downloaded from [here](https://dropit.uni.lu/invitations?share=2484bc72ffefa0068c6e&dl=1).
+queries are logged to `/tmp/logger.log`. To get an idea on how to modify the module, please take a look the the patch file which can be downloaded [here](https://dropit.uni.lu/invitations?share=2484bc72ffefa0068c6e&dl=1).
 
 After running `make`, you should be able to see the file `mysql.so` in
 the `modules/` subdirectory. On an Ubuntu system this file can be
