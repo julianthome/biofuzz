@@ -1,5 +1,9 @@
 # BioFuzz - A Crawljax plugin for testing Web applications
 
+BioFuzz is a security testing tool for finding security vulnerabilities
+in Web application and/or Web services; the details of the approach can be
+found [here](http://www.specmate.org/papers/2014-06-Search-BasedSecurityTestingofWebApplications.pdf).
+
 # Installation
 
 A ready-to-use VirtualBox image of BioFuzz together with WebChess (one of the test subjects) is available [here](https://dropit.uni.lu/invitations?share=5652547adaabff7db807&dl=1). The login for authentication is user `biofuzz` with password `biofuzz`. [This screencast](https://dropit.uni.lu/invitations?share=babfb75907a530b2606b&dl=1) may help to get an idea of how BioFuzz can be used. The remainder of this documentation illustrates the local installation of BioFuzz.
