@@ -28,7 +28,7 @@ git clone https://github.com/julianthome/biofuzz.git
 cd biofuzz
 ```
 
-After that, the absolute paths of WebScarab and the BioFuzz toolkit have to be set within the `pom.xml` file.
+After that, the absolute paths of WebScarab and the BioFuzz toolkit have to be set within the `pom.xml` file; then BioFuzz can be compiled by invoking `mvn compile`.
 
 ```xml
 <dependency>
