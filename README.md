@@ -53,7 +53,7 @@ After that, the absolute paths of WebScarab and the BioFuzz toolkit have to be s
 </dependency>
 ```
 
-## Gekko
+## Gecko driver
 For web browser automation, BioFuzz requires the geckodriver. The latest
 version can be downloaded [here](https://github.com/mozilla/geckodriver/releases).
 Unfortunately, the location of the geckodriver has to be set manually by
