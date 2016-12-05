@@ -31,8 +31,8 @@ public class BioFuzzWebchessArdilla {
 
 		BioFuzzPluginConfig bfCfg = new BioFuzzPluginConfig();
 		
-		bfCfg.setTribes(10);
-		bfCfg.setMaxIter(20);
+		bfCfg.setTribes(20);
+		bfCfg.setMaxIter(12);
 		bfCfg.setCrossoverCycle(2);
 		bfCfg.setCrossoverCnt(2);
 		bfCfg.setCrossoverOffset(5);
