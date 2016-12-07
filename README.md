@@ -1,8 +1,18 @@
 # BioFuzz - A Crawljax plugin for testing Web applications
 
 BioFuzz is a security testing tool for finding security vulnerabilities
-in Web application and/or Web services; the details of the approach can be
-found [here](http://www.specmate.org/papers/2014-06-Search-BasedSecurityTestingofWebApplications.pdf).
+in Web application and/or Web services; the details of the approach are explained [within this paper](http://www.specmate.org/papers/2014-06-Search-BasedSecurityTestingofWebApplications.pdf).
+
+```
+@inproceedings{biofuzz,
+ author = {Julian Thom{\'e} and Alessandra Gorla and Andreas Zeller},
+ title = {Search-based Security Testing of Web Applications},
+ booktitle = {Proceedings of the 7th International Workshop on Search-Based Software Testing},
+ year = {2014},
+ pages = {5--14},
+ publisher = {ACM}
+}
+```
 
 # Installation
 
