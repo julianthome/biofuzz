@@ -16,7 +16,7 @@ in Web application and/or Web services; the details of the approach are explaine
 
 # Installation
 
-A ready-to-use VirtualBox image of BioFuzz together with WebChess (one of the test subjects) is available [here](https://dropit.uni.lu/invitations?share=5652547adaabff7db807&dl=1). The login for authentication is user `biofuzz` with password `biofuzz`. [This screencast](https://dropit.uni.lu/invitations?share=babfb75907a530b2606b&dl=1) may help to get an idea of how BioFuzz can be used. The remainder of this documentation illustrates the local installation of BioFuzz.
+A ready-to-use VirtualBox image of BioFuzz together with WebChess (one of the test subjects) is available [here](https://dropit.uni.lu/invitations?share=7b342c0065d6c1fbae57&dl=1). The login for authentication is user `biofuzz` with password `biofuzz`. [This screencast](https://dropit.uni.lu/invitations?share=0ecad7dba885a9cbc957&dl=1) may help to get an idea of how BioFuzz can be used. The remainder of this documentation illustrates the local installation of BioFuzz.
 
 ## BioFuzz toolkit Installation
 
@@ -33,7 +33,7 @@ After those steps are completed, the file `target/biofuzz-tk-Alpha.jar` should b
 
 ## Compiling BioFuzz
 
-BioFuzz itself is a [Crawljax](http://crawljax.com/) plugin and depends on [WebScarab](https://www.owasp.org/index.php/Category:OWASP_WebScarab_Project) which is a HTTP proxy that captures all of the requests that are being exchanged between the Web client and the Web server. Unfortunately, WebScarab is not available on Maven central, but the jar file may be downloaded [here](https://dropit.uni.lu/invitations?share=724dad6076fae28cef15&dl=1).
+BioFuzz itself is a [Crawljax](http://crawljax.com/) plugin and depends on [WebScarab](https://www.owasp.org/index.php/Category:OWASP_WebScarab_Project) which is a HTTP proxy that captures all of the requests that are being exchanged between the Web client and the Web server. Unfortunately, WebScarab is not available on Maven central, but the jar file may be downloaded [here](https://dropit.uni.lu/invitations?share=e885a411e83da098b6e5&dl=1).
 
 To compile BioFuzz, the following commands have to be executed:
 
@@ -76,7 +76,7 @@ password `webchess`.
 
 ## Test subject Installation
 
-The WebChess test subject can be downloaded [here](https://dropit.uni.lu/invitations?share=012ccd31f72b9176d8c2&dl=1) and its installation is explained in the following.
+The WebChess test subject can be downloaded [here](https://dropit.uni.lu/invitations?share=fe516183383ae5410973&dl=1) and its installation is explained in the following.
 
 To run WebChess, first the database has to be created:
 
@@ -85,7 +85,7 @@ CREATE DATABASE webchess;
 GRANT ALL PRIVILEGES ON webchess.* TO 'webchess'@'localhost' IDENTIFIED BY 'webchess';
 ```
 
-After downloading WebChess [here](https://dropit.uni.lu/invitations?share=012ccd31f72b9176d8c2&dl=1), it may be installed by executing the following commands:
+After downloading WebChess [here](https://dropit.uni.lu/invitations?share=fe516183383ae5410973&dl=1), it may be installed by executing the following commands:
 
 ```bash
 unzip WebChess_1.0.0rc2.zip
@@ -115,7 +115,7 @@ cd php-5.3.10
 ```
 
 Afterwards, the file `php_mysql.c` has to be changed such that all the database
-queries are logged to `/tmp/logger.log`. To get an idea on how to modify the module, please take a look the the patch file which can be downloaded [here](https://dropit.uni.lu/invitations?share=2484bc72ffefa0068c6e&dl=1).
+queries are logged to `/tmp/logger.log`. To get an idea on how to modify the module, please take a look the the patch file which can be downloaded [here](https://dropit.uni.lu/invitations?share=1e41f6ff2fea40927e1a&dl=1).
 
 After running `make`, you should be able to see the file `mysql.so` in
 the `modules/` subdirectory. On an Ubuntu system this file can be
