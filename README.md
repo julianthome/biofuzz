@@ -107,11 +107,20 @@ database queries to be logged to `/tmp/logger.log` and does not depend on any sp
 To get the sources, and to prepare the built of the php MySQL module,
 one may execute the following commands:
 
-```bash
-apt-get source php5_mysql
-tar xvf php5_5.3.10.orig.tar.gz
-cd php-5.3.10
-./configure --with-config-file-path=/etc/php5/apache2 --with-config-file-scan-dir=/etc/php5/apache2/conf.d --sysconfdir=/etc --localstatedir=/var --mandir=/usr/share/man --disable-debug --with-regex=php --disable-rpath --disable-static --with-pic --with-layout=GNU --with-pear=/usr/share/php --enable-sysvsem --enable-sysvshm --enable-sysvmsg --enable-bcmath --with-bz2 --enable-ctype --without-gdbm --with-iconv --with-gettext --enable-mbstring --enable-shmop --enable-sockets --enable-wddx --with-libxml-dir=/usr --with-zlib --with-kerberos=/usr --with-openssl --enable-zip --with-mhash=yes --with-exec-dir=/usr/lib/php5/libexec --with-mysql-sock=/var/run/mysqld/mysqld.sock --with-mysql=shared,/usr --with-pdo-mysql=shared,/usr --with-mysqli=shared,/usr/bin/mysql_config --with-libdir=/lib/i386-linux-gnu/
+```bash 
+apt-get source php5_mysql tar xvf php5_5.3.10.orig.tar.gz cd php-5.3.10
+./configure --with-config-file-path=/etc/php5/apache2
+--with-config-file-scan-dir=/etc/php5/apache2/conf.d --sysconfdir=/etc
+--localstatedir=/var --mandir=/usr/share/man --disable-debug --with-regex=php
+--disable-rpath --disable-static --with-pic --with-layout=GNU
+--with-pear=/usr/share/php --enable-sysvsem --enable-sysvshm --enable-sysvmsg
+--enable-bcmath --with-bz2 --enable-ctype --without-gdbm --with-iconv
+--with-gettext --enable-mbstring --enable-shmop --enable-sockets --enable-wddx
+--with-libxml-dir=/usr --with-zlib --with-kerberos=/usr --with-openssl
+--enable-zip --with-mhash=yes --with-exec-dir=/usr/lib/php5/libexec
+--with-mysql-sock=/var/run/mysqld/mysqld.sock --with-mysql=shared,/usr
+--with-pdo-mysql=shared,/usr --with-mysqli=shared,/usr/bin/mysql_config
+--with-libdir=/lib/i386-linux-gnu/ 
 ```
 
 Afterwards, the file `php_mysql.c` has to be changed such that all the database
