@@ -16,7 +16,19 @@ in Web application and/or Web services; the details of the approach are explaine
 
 # Installation
 
-A ready-to-use VirtualBox image of BioFuzz together with WebChess (one of the test subjects) is available [here](https://dropit.uni.lu/invitations?share=7b342c0065d6c1fbae57&dl=1). The login for authentication is user `biofuzz` with password `biofuzz`. [This screencast](https://dropit.uni.lu/invitations?share=0ecad7dba885a9cbc957&dl=1) may help to get an idea of how BioFuzz can be used. The remainder of this documentation illustrates the local installation of BioFuzz.
+A ready-to-use VirtualBox image of BioFuzz together with WebChess (one of the
+test subjects) is available
+[here](https://dropit.uni.lu/invitations?share=7b342c0065d6c1fbae57&dl=1). The
+login for authentication is user `biofuzz` with password `biofuzz`. 
+
+The following screen-cast may help to get an idea of how BioFuzz can be used.
+The remainder of this documentation illustrates the local installation of
+BioFuzz:
+
+[![BioFuzz Screen-Cast](https://img.youtube.com/vi/LZ-uTCcPF00/0.jpg)](https://www.youtube.com/watch?v=LZ-uTCcPF00)
+
+
+
 
 ## BioFuzz toolkit Installation
 
